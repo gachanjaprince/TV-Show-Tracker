@@ -79,26 +79,36 @@ function searchShows(){
         .then(response => response.json())
         .then(data =>{
             if (data.length <= 0) {
-                
+                // NO RESULTS
             }
 
             let searchResults = document.querySelector('#search-results')
             console.log(searchResults)
+
+            while (searchResults.firstChild) {
+                searchResults.removeChild(searchResults.firstChild);
+            }
+
             for(let i=0; i<data.length; i++) {
-                console.log(data[i].show)
                 let showRow = document.createElement('div')
-                let showRating = data[i].show.rating.average
+                let showYear = 'N/A'
+                if (data[i].show.premiered) { showYear = data[i].show.premiered.slice(0, 4) }
+                
                 let showTitle = data[i].show.name
-                let showGenres = data[i].show.genres
+                let showLanguage = data[i].show.language
+                let showId = data[i].show.id
+
+                showRow.className = "show-result col-6 col-sm-3"
+                showRow.setAttribute('id', `${data[i].show.id}`)
                 let showContent = `
-                    <div class="showResult">
-                        <img class="show-img" src=${data[i].show.image.medium}>
-                        <div class="show-info">
-                            <a href="">
-                                <h4 class="show-title">${data[i].show.name}</h4>
-                            </a>
-                            <span class="show-rating">${data[i].show.rating.average}</span>
-                             <span class="show-genre">${data[i].show.summarry}</span>
+                    <img class="show-img" src=${data[i].show.image.medium}>
+                    <div class="show-info">
+                        <a href="search/${showId}">
+                            <h4 class="show-title">${showTitle}</h4>
+                        </a>
+                        <div class="flexed">
+                            <span class="show-year flx-half">${showYear}</span>
+                            <span class="show-lng flx-half">${showLanguage}</span>
                         </div>
                     </div>
                     `
@@ -107,4 +117,3 @@ function searchShows(){
             }
         });
 }
-
