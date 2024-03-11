@@ -27,8 +27,6 @@ a {
 }
 a:hover {
     text-decoration: underline;
-    color: rgb(85, 145, 55);
-    font-weight: bold;
 }
 
 .flexed {
