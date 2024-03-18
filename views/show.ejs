@@ -14,9 +14,13 @@
             <a href="/" class="main-logo"><span>HOME/LOGO</span></a>
         </div>
         <div class="nav-others">
-            <a href=""><span>Liked Shows</span></a>
-            <a href=""><span>Login</span></a>
-            <a href=""><span>Logout</span></a>
+            <% if(user){ %>
+                <a href="/myFavourites"><span>Liked Shows</span></a>
+                <a href="/logout"><span>Logout</span></a>
+                <% } else { %>
+                <a href="/login"><span>Login</span></a>
+                <a href="/signup"><span>Create Account</span></a>
+            <% } %>
         </div>
     </nav>
 </header>
@@ -24,6 +28,9 @@
     <section class="show">
         <div class="flexed">
             <div class="show-poster">
+                <form action="/likePost/<%= show.id %>?_method=PUT" method="POST">
+                    <button class="btn btn-primary" id="like-btn" type="submit">Like Show</button>
+                </form>
                 <img src="<%= show.image.original %>">
             </div>
             <div class="show-details">

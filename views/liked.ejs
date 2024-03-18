@@ -15,7 +15,6 @@
         </div>
         <div class="nav-others">
             <% if(user){ %>
-                <a href="/myFavourites"><span>Liked Shows</span></a>
                 <a href="/logout"><span>Logout</span></a>
                 <% } else { %>
                 <a href="/login"><span>Login</span></a>
@@ -28,25 +27,25 @@
     <section>
         <% if (user) { %>
             <h1>Welcome <%= user.userName %></h1>
-            <% } else { %>
-            <h1>Keep track of you favourite shows!</h1>
         <% } %>
-        <div>
-            <input id="search-input" type="text"  placeholder="Enter show name">
-            <input id="main-search" type="button" value="Search"></button>
-        </div>
     </section>
     <section>
-        <div id="no-results">
-            <!--THIS IS WHERE OUR ERROR MESSAGE WILL BE INSERTED-->
-        </div> 
-        <div id="search-results" class="row">
-            <!-- RESULT DIVS -->
+        <div id="liked-shows" class="row">
+            <% liked.forEach( el => { %>
+                <div class="show-result col-6 col-sm-3 ">
+                    <img class="show-img" src=<%= el.showImg %>>
+                    <div class="show-info">
+                        <a href="search/<%= el.showId %>">
+                            <h4 class="show-title"><%= el.showName %></h4>
+                        </a>
+                        <div class="flexed">
+                            <span class="show-year flx-half"><%= el.showYear %></span>
+                            <span class="show-lng flx-half"><%= el.showLanguage %></span>
+                        </div>
+                    </div>
+                </div>
+            <% }) %> 
         </div>
-    </section>
-
-    <section id="feature-shows">
-             <!-- THREE FEATURE SHOW DIVS -->
     </section>
     <script src="js/main.js" type="text/javascript"></script>
 </body>

@@ -43,7 +43,7 @@ a:hover {
     padding-right: 7.5px;
 }
 
-/********* QURY & RESULTS *******/
+/********* QUERY & RESULTS *******/
 #main-search, #search-input {
     vertical-align: top;
     width: 225px;
@@ -68,6 +68,11 @@ a:hover {
 }
 
 /********* SHOW PAGE *******/
+#like-btn {
+    width: 100%;
+    margin: 2.5px auto;
+}
+
 .show-poster {
     flex-basis: 40%;
     padding: 0 1rem;

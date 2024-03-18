@@ -10,6 +10,7 @@ const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const todoRoutes = require('./routes/todos')
 const cors = require('cors')
+const methodOverride = require('method-override')
 
 
 require('dotenv').config({path: './config/.env'})
@@ -27,6 +28,9 @@ app.use(logger('dev'))
 
 // CORS
 app.use(cors())
+
+// Override with POST having "?_method=PUT/DELETE"
+app.use(methodOverride('_method'))
 
 // Sessions
 app.use(
