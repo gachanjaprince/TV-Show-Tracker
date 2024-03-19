@@ -11,7 +11,7 @@
 <header>
     <nav class="main-nav flexed">
         <div class="main-logo">
-            <a href="/" class="main-logo"><span>HOME/LOGO</span></a>
+            <a href="/tracker" class="main-logo"><span>HOME/LOGO</span></a>
         </div>
         <div class="nav-others">
             <% if(user){ %>
@@ -35,7 +35,7 @@
                 <div class="show-result col-6 col-sm-3 ">
                     <img class="show-img" src=<%= el.showImg %>>
                     <div class="show-info">
-                        <a href="search/<%= el.showId %>">
+                        <a href="/tracker/search/<%= el.showId %>">
                             <h4 class="show-title"><%= el.showName %></h4>
                         </a>
                         <div class="flexed">

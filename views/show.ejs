@@ -15,7 +15,7 @@
         </div>
         <div class="nav-others">
             <% if(user){ %>
-                <a href="/myFavourites"><span>Liked Shows</span></a>
+                <a href="/tracker/myFavourites"><span>Liked Shows</span></a>
                 <a href="/logout"><span>Logout</span></a>
                 <% } else { %>
                 <a href="/login"><span>Login</span></a>
@@ -28,7 +28,7 @@
     <section class="show">
         <div class="flexed">
             <div class="show-poster">
-                <form action="/likePost/<%= show.id %>?_method=PUT" method="POST">
+                <form action="/tracker/likePost/<%= show.id %>?_method=PUT" method="POST">
                     <button class="btn btn-primary" id="like-btn" type="submit">Like Show</button>
                 </form>
                 <img src="<%= show.image.original %>">
@@ -36,7 +36,7 @@
             <div class="show-details">
                 <div class="flexed">
                     <h1 class="show-title"><%= show.name %></h2>
-                    <a href="/likePost"><span class="add-favourite"></span></a>
+                    <a href="/tracker/likePost"><span class="add-favourite"></span></a>
                 </div>    
                 <div class="show-summary"><p><%= summary %></p></div>
             </div>
