@@ -9,6 +9,6 @@ router.get('/', ensureAuth, trackerController.getIndex)
 router.get('/search', trackerController.getResult)
 router.get('/search/:id', trackerController.getShow)
 router.get('/myfavourites', ensureAuth, trackerController.getLiked)
-router.put('/likePost/:id', ensureAuth, trackerController.likePost)
+router.put('/toggleLike/:id', ensureAuth, trackerController.toggleLike)
 
 module.exports = router

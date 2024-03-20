@@ -28,7 +28,7 @@
     <section class="show">
         <div class="flexed">
             <div class="show-poster">
-                <form action="/tracker/likePost/<%= show.id %>?_method=PUT" method="POST">
+                <form action="/tracker/toggleLike/<%= show.id %>?_method=PUT" method="POST">
                     <button class="btn <%= isLiked ? 'btn-secondary' : 'btn-primary' %>" id="like-btn" type="submit">
                         <%= isLiked ? 'Unlike Show' : 'Like Show' %>
                     </button>
@@ -38,7 +38,7 @@
             <div class="show-details">
                 <div class="flexed">
                     <h1 class="show-title"><%= show.name %></h2>
-                    <a href="/tracker/likePost"><span class="add-favourite"></span></a>
+                    <a href="/tracker/toggleLike"><span class="add-favourite"></span></a>
                 </div>    
                 <div class="show-summary"><p><%= summary %></p></div>
             </div>

@@ -55,7 +55,7 @@ module.exports = {
             console.log(err)
         }
     },
-    likePost: async (req, res) => {
+    toggleLike: async (req, res) => {
         try {
             const userId = req.user.id;
             const showId = req.params.id;
