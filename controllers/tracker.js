@@ -47,27 +47,65 @@ module.exports = {
             console.log(err)
         }
     },
-    likePost: async (req, res)=> {
+
+    likePost: async (req, res) => {
         try {
-            const response = await fetch(`https://api.tvmaze.com/shows/${req.params.id}`)
-            const show = await response.json()
-
-            let showYear = 'N/A'
-            if (show.premiered) { showYear = show.premiered.slice(0, 4) }
-
-            await User.findByIdAndUpdate(req.user.id, {
-                $push: {"liked": {
-                    showId: req.params.id,
-                    showName: show.name,
-                    showImg: show.image.medium,
-                    showYear: showYear,
-                    showLanguage: show.language
-                
-                }}
-            })
-        res.redirect(`/tracker/search/${req.params.id}`)
-        } catch(err){
-            console.log(err)
+            const userId = req.user.id; // Assuming req.user is populated with the logged-in user's info
+            const showId = req.params.id;
+    
+            const user = await User.findById(userId);
+            const isAlreadyLiked = user.liked.some(show => show.showId === showId);
+    
+            if (isAlreadyLiked) {
+                // Remove the show from liked if it's already there
+                await User.findByIdAndUpdate(userId, {
+                    $pull: { liked: { showId: showId } }
+                });
+            } else {
+                // If not liked, fetch show details and add to liked shows
+                const response = await fetch(`https://api.tvmaze.com/shows/${showId}`);
+                const show = await response.json();
+                let showYear = show.premiered ? show.premiered.slice(0, 4) : 'N/A';
+    
+                await User.findByIdAndUpdate(userId, {
+                    $push: { liked: {
+                        showId: showId,
+                        showName: show.name,
+                        showImg: show.image.medium,
+                        showYear: showYear,
+                        showLanguage: show.language
+                    }}
+                });
+            }
+    
+            res.redirect(`/tracker/search/${showId}`);
+        } catch (err) {
+            console.log(err);
         }
     }
+
+
+    // likePost: async (req, res)=> {
+    //     try {
+    //         const response = await fetch(`https://api.tvmaze.com/shows/${req.params.id}`)
+    //         const show = await response.json()
+
+    //         let showYear = 'N/A'
+    //         if (show.premiered) { showYear = show.premiered.slice(0, 4) }
+
+    //         await User.findByIdAndUpdate(req.user.id, {
+    //             $push: {"liked": {
+    //                 showId: req.params.id,
+    //                 showName: show.name,
+    //                 showImg: show.image.medium,
+    //                 showYear: showYear,
+    //                 showLanguage: show.language
+                
+    //             }}
+    //         })
+    //     res.redirect(`/tracker/search/${req.params.id}`)
+    //     } catch(err){
+    //         console.log(err)
+    //     }
+    // }
 }
