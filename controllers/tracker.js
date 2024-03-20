@@ -47,10 +47,9 @@ module.exports = {
             console.log(err)
         }
     },
-
     likePost: async (req, res) => {
         try {
-            const userId = req.user.id; // Assuming req.user is populated with the logged-in user's info
+            const userId = req.user.id;
             const showId = req.params.id;
     
             const user = await User.findById(userId);
@@ -83,29 +82,4 @@ module.exports = {
             console.log(err);
         }
     }
-
-
-    // likePost: async (req, res)=> {
-    //     try {
-    //         const response = await fetch(`https://api.tvmaze.com/shows/${req.params.id}`)
-    //         const show = await response.json()
-
-    //         let showYear = 'N/A'
-    //         if (show.premiered) { showYear = show.premiered.slice(0, 4) }
-
-    //         await User.findByIdAndUpdate(req.user.id, {
-    //             $push: {"liked": {
-    //                 showId: req.params.id,
-    //                 showName: show.name,
-    //                 showImg: show.image.medium,
-    //                 showYear: showYear,
-    //                 showLanguage: show.language
-                
-    //             }}
-    //         })
-    //     res.redirect(`/tracker/search/${req.params.id}`)
-    //     } catch(err){
-    //         console.log(err)
-    //     }
-    // }
 }
