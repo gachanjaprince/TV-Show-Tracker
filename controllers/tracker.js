@@ -14,8 +14,15 @@ module.exports = {
     },
     getShow: async (req, res)=>{
         try {
+            const showId = req.params.id;
+            const userId = req.user.id;
+            // Fetch the user document and check if the "liked" array contains the show
+            const user = await User.findById(userId);
+            const isLiked = user.liked.some(show => show.showId === showId);
+
             const response = await fetch(`https://api.tvmaze.com/shows/${req.params.id}`)
             const show = await response.json()
+
             let summary = 'NO SUMMARY AVAILABLE'
             if (show.summary) {
                 summary = show.summary.replace(/[>]/g, e=> `${e} `)
@@ -28,7 +35,8 @@ module.exports = {
             res.render('show.ejs', {
                 user: req.user,
                 show: show,
-                summary: summary
+                summary: summary,
+                isLiked:isLiked,
             })
         } catch(err){
             console.log(err)
@@ -52,6 +60,7 @@ module.exports = {
             const userId = req.user.id;
             const showId = req.params.id;
     
+            // Fetch the user document and check if the "liked" array contains the show
             const user = await User.findById(userId);
             const isAlreadyLiked = user.liked.some(show => show.showId === showId);
     
@@ -64,7 +73,8 @@ module.exports = {
                 // If not liked, fetch show details and add to liked shows
                 const response = await fetch(`https://api.tvmaze.com/shows/${showId}`);
                 const show = await response.json();
-                let showYear = show.premiered ? show.premiered.slice(0, 4) : 'N/A';
+                let showYear = 'N/A'
+                if (show.premiered) { showYear = show.premiered.slice(0, 4) }
     
                 await User.findByIdAndUpdate(userId, {
                     $push: { liked: {

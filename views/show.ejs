@@ -29,7 +29,9 @@
         <div class="flexed">
             <div class="show-poster">
                 <form action="/tracker/likePost/<%= show.id %>?_method=PUT" method="POST">
-                    <button class="btn btn-primary" id="like-btn" type="submit">Like Show</button>
+                    <button class="btn <%= isLiked ? 'btn-secondary' : 'btn-primary' %>" id="like-btn" type="submit">
+                        <%= isLiked ? 'Unlike Show' : 'Like Show' %>
+                    </button>
                 </form>
                 <img src="<%= show.image.original %>">
             </div>
