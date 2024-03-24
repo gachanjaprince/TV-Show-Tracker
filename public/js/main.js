@@ -33,7 +33,7 @@ function searchShows(){
                 let showContent = `
                     <img class="show-img" src=${data[i].show.image.medium}>
                     <div class="show-info">
-                        <a href="tracker/search/${showId}">
+                        <a href="/tracker/search/${showId}">
                             <h4 class="show-title">${showTitle}</h4>
                         </a>
                         <div class="flexed">

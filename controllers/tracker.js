@@ -6,6 +6,7 @@ module.exports = {
     },
     getResult: async (req, res)=>{
      try {
+        // changed from /home.ejs
         res.redirect('/home.ejs')
         
      } catch(err){
