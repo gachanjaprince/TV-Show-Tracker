@@ -22,6 +22,10 @@ a:hover {
   margin: auto;
 }
 
+.main-logo img {
+  width: 150px;
+}
+
 .form {
   position: relative;
   z-index: 1;
