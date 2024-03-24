@@ -2,23 +2,20 @@ const User = require('../models/User')
 
 module.exports = {
     getIndex: (req,res)=>{
-        res.render('home.ejs', { user: req.user })
+        res.redirect('/')
     },
-    getResult: async (req, res)=>{
-     try {
-        res.redirect('/home.ejs')
-        
-     } catch(err){
-        console.log(err)
-     }
+    getResult: (req, res)=>{
+        res.redirect('/')
     },
     getShow: async (req, res)=>{
         try {
             const showId = req.params.id;
-            const userId = req.user.id;
+            let userId
+            if (req.user) {userId = req.user.id}
             // Fetch the user document and check if the "liked" array contains the show
             const user = await User.findById(userId);
-            const isLiked = user.liked.some(show => show.showId === showId);
+            let isLiked
+            if (req.user) {isLiked = user.liked.some(show => show.showId === showId)};
 
             const response = await fetch(`https://api.tvmaze.com/shows/${req.params.id}`)
             const show = await response.json()
@@ -36,7 +33,7 @@ module.exports = {
                 user: req.user,
                 show: show,
                 summary: summary,
-                isLiked:isLiked,
+                isLiked: isLiked,
             })
         } catch(err){
             console.log(err)
