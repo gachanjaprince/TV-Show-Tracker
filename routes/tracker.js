@@ -5,7 +5,7 @@ const homeController = require('../controllers/home')
 const trackerController = require('../controllers/tracker')
 const { ensureAuth } = require('../middleware/auth')
 
-router.get('/', ensureAuth, trackerController.getIndex)
+router.get('/', trackerController.getIndex)
 router.get('/search', trackerController.getResult)
 router.get('/search/:id', trackerController.getShow)
 router.get('/myfavourites', ensureAuth, trackerController.getLiked)
