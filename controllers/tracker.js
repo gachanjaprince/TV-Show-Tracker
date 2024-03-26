@@ -4,8 +4,14 @@ module.exports = {
     getIndex: (req,res)=>{
         res.redirect('/')
     },
-    getResult: (req, res)=>{
-        res.redirect('/')
+    getResult: async (req, res)=>{
+     try {
+        // changed from /home.ejs
+        res.redirect('/home.ejs')
+        
+     } catch(err){
+        console.log(err)
+     }
     },
     getShow: async (req, res)=>{
         try {
