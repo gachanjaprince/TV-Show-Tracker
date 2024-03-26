@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Home</title>
+    <title>Laurel Show Tracker</title>
 </head>
 <header>
     <nav class="main-nav flexed">
         <div class="main-logo">
-            <a href="/tracker" class="main-logo"><span>HOME/LOGO</span></a>
+            <a href="/" class="main-logo"><img src="/images/logo.png"></a>
         </div>
         <div class="nav-others">
             <% if(user){ %>
@@ -47,6 +47,19 @@
             <% }) %> 
         </div>
     </section>
-    <script src="/js/main.js" type="text/javascript"></script>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center pb-3 mb-3">
+            <% if(user){ %>
+                <li class="nav-item"><a href= "/" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href= "/tracker/myFavourites" class="nav-link px-2 text-muted">Liked Shows</a></li>
+                <li class="nav-item"><a href= "/logout" class="nav-link px-2 text-muted">Logout</a></li>
+            <% } else { %>
+                <li class="nav-item"><a href= "/login" class="nav-link px-2 text-muted">Login</a></li>
+                <li class="nav-item"><a href= "/signup" class="nav-link px-2 text-muted">Create Account</a></li>
+            <% } %>
+        </ul>
+        <p class="text-center text-muted">© Dylan Young, Prince Gachanja</p>
+    </footer>
+    <script src="/js/main.js" type="text/html"></script>
 </body>
 </html>
